@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "KickCut",
+    "slug": "kickcut-mobile",
+    "version": "0.1.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#0c110f",
+    "android": {
+      "package": "com.unsatisfied0.kickcut",
+      "adaptiveIcon": {
+        "backgroundColor": "#0c110f",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/CascadiaMono.ttf",
+            "./assets/fonts/CascadiaMono-SemiBold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 26
+          }
+        }
+      ],
+      "expo-sqlite"
+    ]
+  }
+}

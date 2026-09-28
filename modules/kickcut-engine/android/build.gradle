@@ -1,0 +1,33 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.unsatisfied0.kickcut.engine'
+version = '0.1.0'
+
+android {
+  namespace "com.unsatisfied0.kickcut.engine"
+  defaultConfig {
+    versionCode 1
+    versionName "0.1.0"
+  }
+  lintOptions {
+    abortOnError false
+  }
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
+}
+
+dependencies {
+  // FFmpegKit was retired in 2025; this is the community-maintained build on
+  // Maven Central. `full-gpl` because the editing-safe mode needs libx264.
+  implementation 'dev.ffmpegkit-maintained:ffmpeg-kit-full-gpl:8.1.9'
+  implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+  implementation 'androidx.documentfile:documentfile:1.0.1'
+  implementation 'androidx.core:core-ktx:1.13.1'
+
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1'
+}

@@ -1,0 +1,6 @@
+{
+  "platforms": ["android"],
+  "android": {
+    "modules": ["com.unsatisfied0.kickcut.engine.KickcutEngineModule"]
+  }
+}

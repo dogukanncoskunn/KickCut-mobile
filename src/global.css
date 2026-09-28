@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "uniwind";
+
+/*
+ * The palette from KickCut's src/styles.css, value for value.
+ *
+ * The green is allowed exactly three meanings: THIS IS THE PRIMARY ACTION ·
+ * THIS JOB IS RUNNING · THIS SUCCEEDED. Amber = this costs you real time;
+ * rose = this destroys work. Each accent has a text twin the light theme
+ * darkens, while the fills stay exactly the brand colours.
+ */
+@layer theme {
+  :root {
+    @variant dark {
+      --color-ink: #0c110f;
+      --color-surface: #141a17;
+      --color-raised: #1b231e;
+      --color-line: #232c27;
+      --color-muted: #7e8c84;
+      --color-body: #dfe6e1;
+      --color-kick-text: #53fc18;
+      --color-amber-text: #e8a33d;
+      --color-rose-text: #f2555a;
+    }
+    @variant light {
+      --color-ink: #f2f5f2;
+      --color-surface: #ffffff;
+      --color-raised: #eaefea;
+      --color-line: #d5ddd6;
+      --color-muted: #55645b;
+      --color-body: #131a15;
+      --color-kick-text: #1d8a09;
+      --color-amber-text: #8c5a06;
+      --color-rose-text: #c01f24;
+    }
+  }
+}
+
+@theme {
+  --color-kick: #53fc18;
+  --color-amber: #e8a33d;
+  --color-rose: #f2555a;
+  --color-onkick: #0c110f;
+
+  --font-mono: "CascadiaMono";
+  --font-mono-semibold: "CascadiaMono-SemiBold";
+
+  /* 11, 12, 13, 15, 18, 24, 32 px against the 14px root, as on the desktop. */
+  --text-mini: 0.7857rem;
+  --text-small: 0.8571rem;
+  --text-body: 0.9286rem;
+  --text-mid: 1.0714rem;
+  --text-title: 1.2857rem;
+  --text-page: 1.7143rem;
+  --text-figure: 2.2857rem;
+}
