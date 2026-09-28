@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - run: npm ci
+      - run: npm run typecheck
+
+      # android/ is generated (Continuous Native Generation), never committed.
+      - run: npx expo prebuild -p android --no-install
+
+      # The engine's JUnit suite is the desktop's Rust tests, one for one.
+      - name: Engine tests
+        working-directory: android
+        run: ./gradlew :kickcut-engine:testDebugUnitTest
+
+      - name: Debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug -PreactNativeArchitectures=arm64-v8a
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kickcut-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7

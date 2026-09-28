@@ -25,9 +25,8 @@ Run lint and typecheck before declaring any task done.
 
 ## Navigation & Routing
 
-- Use **Expo Router** for all navigation. Routes live in `src/app/` — every file there is a screen, `_layout.tsx` files define navigators. Keep non-route code (components, hooks, utils) outside `src/app/`.
-- Import `Link`, `router`, and `useLocalSearchParams` from `expo-router`.
-- Docs: https://docs.expo.dev/router/introduction.md
+- **No router, on purpose.** This is the Android port of the KickCut desktop app and mirrors its structure file for file: four panes switched by one `useState` in `src/App.tsx`, all kept mounted. Do not introduce Expo Router - a desktop change must map to the same file name here.
+- The download engine is Kotlin in `modules/kickcut-engine`, ported from the desktop's Rust. Its JUnit tests mirror the Rust tests; change them together.
 
 ## Building with EAS
 
