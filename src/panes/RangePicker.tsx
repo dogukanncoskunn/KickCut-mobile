@@ -132,6 +132,9 @@ function Track({
       <View
         {...pan.panHandlers}
         onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
+        // A grip at either end hangs half outside the track; without this the
+        // finger lands on it and nothing answers. Positions out there clamp.
+        hitSlop={{ left: GRIP, right: GRIP, top: 6, bottom: 6 }}
         className="relative h-11 justify-center"
         accessibilityRole="adjustable"
         accessibilityLabel={`${startLabel} ${fullTimecode(value.start)}, ${endLabel} ${fullTimecode(value.end)}`}

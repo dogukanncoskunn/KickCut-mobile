@@ -57,7 +57,7 @@ export function Settings() {
 
 function SettingCard({ title, hint, children }: { title: string; hint: string; children: ReactNode }) {
   return (
-    <Card className="h-full flex-col gap-4 p-5">
+    <Card className="flex-1 flex-col gap-4 p-5">
       <View className="flex-col gap-1">
         <Text className="text-mid font-semibold text-body">{title}</Text>
         <Text className="text-small text-muted">{hint}</Text>

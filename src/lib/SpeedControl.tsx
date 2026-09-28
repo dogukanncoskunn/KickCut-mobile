@@ -62,7 +62,8 @@ export function SpeedControl({ compact = false }: { compact?: boolean }) {
       {!compact ? (
         <Text className="text-small text-muted">
           {enabled && kbPerSecond > 0
-            ? t("speed.example", { mb: (kbPerSecond / 1000).toFixed(kbPerSecond % 1000 ? 1 : 0) })
+            ? // Two places below 100 KB/s, or a 20 KB/s cap reads as "0.0 MB/s".
+              t("speed.example", { mb: (kbPerSecond / 1000).toFixed(kbPerSecond < 100 ? 2 : kbPerSecond % 1000 ? 1 : 0) })
             : t("speed.unlimited.hint")}
         </Text>
       ) : null}

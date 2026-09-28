@@ -14,6 +14,7 @@ import {
 import type { PressableProps, TextInputProps } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 import { useCSSVariable } from "uniwind";
+import { useLocale } from "../i18n";
 import { useMotion } from "./Motion";
 
 /*
@@ -480,9 +481,13 @@ export function Note({ kind, children, action }: { kind: NoteKind; children: Rea
 export function Badge({ kind = "neutral", children }: { kind?: NoteKind | "neutral"; children: ReactNode }) {
   const box = kind === "neutral" ? "border-line bg-raised" : noteBox[kind] + " bg-transparent";
   const text = kind === "neutral" ? "text-muted" : noteText[kind];
+  // Upper-cased in the language on screen, not by the style: a style knows no
+  // locale, and Turkish "birlikte" must become "BİRLİKTE", not "BIRLIKTE".
+  const { locale } = useLocale();
+  const label = typeof children === "string" ? children.toLocaleUpperCase(locale) : children;
   return (
     <View className={"flex-row items-center self-start rounded border px-1.5 py-0.5 " + box}>
-      <Text className={"font-mono text-mini uppercase tracking-wide " + text}>{children}</Text>
+      <Text className={"font-mono text-mini tracking-wide " + text}>{label}</Text>
     </View>
   );
 }

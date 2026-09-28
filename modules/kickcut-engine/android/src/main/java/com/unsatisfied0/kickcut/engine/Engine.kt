@@ -373,6 +373,11 @@ object Engine {
       next.error = null
       next.copy() to c
     }
+    // Recorded, not only held in memory: a job that is running when the app
+    // dies must come back as paused, and it can only do that if the file says
+    // it was running. (The desktop's pump skips this save, so a job killed
+    // mid-download comes back as "waiting" and nothing ever starts it.)
+    runCatching { save(job) }
     DownloadService.start(app)
 
     scope.launch {
@@ -706,6 +711,11 @@ object Engine {
         jobs.clear()
         jobs.addAll(restored)
       }
+      emitQueue()
+      // A job still waiting its turn was asked to run; it should not sit there
+      // until someone pauses and resumes it.
+      pump()
+      return
     }
     emitQueue()
   }

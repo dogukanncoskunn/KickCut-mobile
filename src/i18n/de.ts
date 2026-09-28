@@ -12,7 +12,7 @@ export const de: Messages = {
   "downloads.forget": "Aus Liste entfernen",
   "downloads.delete": "Datei löschen",
   "downloads.delete.confirm":
-    "Die Videodatei wird von Ihrem Computer gelöscht. Sind Sie sicher? Das lässt sich nicht rückgängig machen.",
+    "Die Videodatei wird von Ihrem Handy gelöscht. Sind Sie sicher? Das lässt sich nicht rückgängig machen.",
   "downloads.delete.ok": "Datei löschen",
   "action.cancel": "Abbrechen",
   "downloads.forget.confirm": "Diesen Eintrag entfernen? Die Videodatei bleibt erhalten.",
@@ -122,7 +122,7 @@ export const de: Messages = {
   "ffmpeg.hint": "KickCut lädt das Video selbst; FFmpeg fügt die Teile zu einer MP4 zusammen.",
   "ffmpeg.checking": "Wird geprüft…",
   "ffmpeg.managed": "Von KickCut installiert",
-  "ffmpeg.system": "Auf diesem Rechner gefunden",
+  "ffmpeg.system": "Auf diesem Handy gefunden",
   "ffmpeg.missing": "Noch nicht installiert",
   "ffmpeg.bundled": "In die App eingebaut",
   "ffmpeg.install": "FFmpeg installieren ({size})",
@@ -135,7 +135,7 @@ export const de: Messages = {
   "ffmpeg.blocked": "FFmpeg muss installiert sein, bevor ein Download gemuxt werden kann.",
 
   "settings.language": "Sprache",
-  "settings.language.hint": "Wirkt sofort, wird auf diesem Rechner gespeichert.",
+  "settings.language.hint": "Wirkt sofort, wird auf diesem Handy gespeichert.",
   "settings.motion": "Animationen",
   "settings.motion.hint": "Kurze Einblend- und Fortschrittsanimationen.",
   "settings.motion.on": "An",

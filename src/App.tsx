@@ -45,6 +45,13 @@ export function App() {
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
   const [tab, setTab] = useState<TabId>("library");
+  // On a narrow phone the tab row scrolls; the active tab is brought into view.
+  const strip = useRef<ScrollView>(null);
+  const tabX = useRef<Partial<Record<TabId, { x: number; width: number }>>>({});
+  useEffect(() => {
+    const at = tabX.current[tab];
+    if (at) strip.current?.scrollTo({ x: Math.max(0, at.x - 24), animated: true });
+  }, [tab]);
   const { vod } = useSelection();
 
   // Choosing a broadcast is the start of setting up a download, so it moves
@@ -86,13 +93,24 @@ export function App() {
 
       <View className="h-10 shrink-0 border-b border-line bg-surface">
         <ScrollView
+          ref={strip}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerClassName="items-stretch gap-1 px-6"
           contentContainerStyle={{ paddingLeft: 24 + insets.left, paddingRight: 24 + insets.right }}
         >
           {TABS.map((x) => (
-            <TabButton key={x.id} icon={x.icon} label={t(x.label)} on={x.id === tab} onPress={() => setTab(x.id)} />
+            <View
+              key={x.id}
+              className="flex-row"
+              onLayout={(e) => {
+                tabX.current[x.id] = e.nativeEvent.layout;
+                // A language switch resizes the tabs; keep the active one in view.
+                if (x.id === tab) strip.current?.scrollTo({ x: Math.max(0, e.nativeEvent.layout.x - 24), animated: true });
+              }}
+            >
+              <TabButton icon={x.icon} label={t(x.label)} on={x.id === tab} onPress={() => setTab(x.id)} />
+            </View>
           ))}
         </ScrollView>
       </View>

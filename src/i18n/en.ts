@@ -15,7 +15,7 @@ export const en = {
   "downloads.forget": "Remove from list",
   "downloads.delete": "Delete file",
   "downloads.delete.confirm":
-    "The video file will be deleted from your computer. Are you sure? This cannot be undone.",
+    "The video file will be deleted from your phone. Are you sure? This cannot be undone.",
   "downloads.delete.ok": "Delete the file",
   "action.cancel": "Cancel",
   "downloads.forget.confirm": "Remove this from the list? The video file stays where it is.",
@@ -125,7 +125,7 @@ export const en = {
   "ffmpeg.hint": "KickCut downloads the video itself but uses FFmpeg to join the pieces into one MP4.",
   "ffmpeg.checking": "Checking…",
   "ffmpeg.managed": "Installed by KickCut",
-  "ffmpeg.system": "Found on this machine",
+  "ffmpeg.system": "Found on this phone",
   "ffmpeg.missing": "Not installed yet",
   "ffmpeg.bundled": "Built into the app",
   "ffmpeg.install": "Install FFmpeg ({size})",
@@ -138,7 +138,7 @@ export const en = {
   "ffmpeg.blocked": "FFmpeg has to be installed before a download can be muxed.",
 
   "settings.language": "Language",
-  "settings.language.hint": "Applies immediately, remembered on this machine.",
+  "settings.language.hint": "Applies immediately, remembered on this phone.",
   "settings.motion": "Animations",
   "settings.motion.hint": "Short entrance and progress animations.",
   "settings.motion.on": "On",
