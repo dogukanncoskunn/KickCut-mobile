@@ -84,7 +84,7 @@ export function FloatingDownload({ enabled = true, bottomInset = 0 }: { enabled?
       className="absolute z-40"
       style={[
         { width: Math.min(22 * 14, screenW - 24) },
-        place ? { left: place.x, top: place.y } : { left: 14, bottom: 2.25 * 14 + bottomInset },
+        place ? { left: place.x, top: place.y } : { left: 14, bottom: 12 + bottomInset },
       ]}
     >
       <View className="overflow-hidden rounded-lg border border-line bg-surface shadow-2xl shadow-black/50">

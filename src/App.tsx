@@ -20,6 +20,8 @@ import { Settings } from "./panes/Settings";
 const logoDark = require("../assets/logo-dark.png");
 const logoLight = require("../assets/logo-light.png");
 const LOGO_RATIO = 206 / 72;
+/* Height of the "made by" strip above the system inset. */
+const FOOTER = 24;
 
 /*
  * Four screens, one useState - exactly as on the desktop. No router, because
@@ -134,8 +136,8 @@ export function App() {
               alignSelf: "center",
               paddingLeft: 24 + insets.left,
               paddingRight: 24 + insets.right,
-              // Room for the "made by" mark and the docked download panel.
-              paddingBottom: 24 + insets.bottom + 28,
+              // Room for the docked download panel.
+              paddingBottom: 24 + 28,
             }}
           >
             <Text className="text-page font-semibold tracking-tight text-body">{t(pane.title)}</Text>
@@ -156,17 +158,23 @@ export function App() {
         ))}
       </View>
 
-      {/* Pinned to the window, not a pane, and never in the way of a touch. */}
-      <Text
+      {/*
+        A strip of its own under the panes, not a mark floating over them. On
+        the desktop the window has margin to spare; on a phone a floating mark
+        sat on top of whatever text scrolled beneath it.
+      */}
+      <View
         pointerEvents="none"
-        className="absolute left-4 font-mono text-mini text-body/45"
-        style={{ bottom: 10 + insets.bottom }}
+        className="shrink-0 bg-ink px-4"
+        style={{ height: FOOTER + insets.bottom, paddingLeft: 16 + insets.left, justifyContent: "center" }}
       >
-        {t("app.madeBy")}
-      </Text>
+        <Text className="font-mono text-mini text-body/45" style={{ marginBottom: insets.bottom }}>
+          {t("app.madeBy")}
+        </Text>
+      </View>
 
       {/* The queue follows you everywhere except the screen that already has it. */}
-      <FloatingDownload enabled={tab !== "download"} bottomInset={insets.bottom} />
+      <FloatingDownload enabled={tab !== "download"} bottomInset={FOOTER + insets.bottom} />
     </View>
   );
 }
