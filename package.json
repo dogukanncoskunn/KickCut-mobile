@@ -29,5 +29,6 @@
     "typecheck": "tsc --noEmit",
     "test:engine": "cd android && ./gradlew :kickcut-engine:testDebugUnitTest"
   },
-  "private": true
+  "private": true,
+  "license": "GPL-3.0-or-later"
 }

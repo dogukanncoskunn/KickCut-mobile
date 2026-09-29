@@ -76,6 +76,16 @@ the desktop's Rust (`hls.rs`, `download.rs`, `mux.rs`, `rate.rs`). The ffmpeg
 arguments are the desktop's, pinned by the same tests; a fix to one belongs in
 the other.
 
+Release builds are signed with the project's key when the machine building
+them has it configured (see `plugins/withReleaseSigning.js`); anywhere else a
+release build still compiles, signed with the debug key.
+
+## License
+
+GPL-3.0-or-later. The bundled FFmpeg build includes libx264, which is GPL, so
+the app as distributed is too. Cascadia Mono is under the SIL Open Font
+License (`assets/fonts/CascadiaMono-LICENSE.txt`).
+
 ## A note on what you download
 
 This is a tool for keeping your own broadcasts, or content you have permission

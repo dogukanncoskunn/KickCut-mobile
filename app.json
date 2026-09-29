@@ -48,7 +48,8 @@
         {
           "addGeneratedScheme": false
         }
-      ]
+      ],
+      "./plugins/withReleaseSigning"
     ]
   }
 }
