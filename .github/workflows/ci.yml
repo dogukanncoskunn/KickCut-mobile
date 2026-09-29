@@ -5,11 +5,22 @@ on:
     branches: [main]
   pull_request:
 
+# Nothing here writes to the repo or needs a secret.
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the secret scan reads the whole history
+
+      # Nothing that looks like a key, token or password, in any commit.
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -32,12 +43,16 @@ jobs:
         working-directory: android
         run: ./gradlew :kickcut-engine:testDebugUnitTest
 
-      - name: Debug APK
+      - name: Release APK
         working-directory: android
-        run: ./gradlew assembleDebug -PreactNativeArchitectures=arm64-v8a
+        run: ./gradlew assembleRelease -PreactNativeArchitectures=arm64-v8a
+
+      # The privacy promises in the README, checked against what was built.
+      - name: Privacy gate
+        run: bash scripts/privacy-gate.sh android/app/build/outputs/apk/release/app-release.apk
 
       - uses: actions/upload-artifact@v4
         with:
-          name: kickcut-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: kickcut-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 7

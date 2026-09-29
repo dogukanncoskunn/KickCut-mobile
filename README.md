@@ -30,14 +30,28 @@ in an editor. Same screens, same controls, same engine behaviour as the
   system says time is up the job pauses; resume it and nothing is lost.
 - No self-updater: install new builds by hand.
 
-## What it sends
+## What it sends, and what it keeps
 
-No analytics, no telemetry, no crash reporting. Two hosts:
+No accounts, no analytics, no telemetry, no crash reporting, no ads. The app
+talks to exactly three hosts, all Kick's own - measured on a release build
+through a logging proxy, and nothing at all while it sits idle:
 
 | Host | Why |
 |---|---|
 | `kick.com` | broadcast list and VOD metadata |
+| `images.kick.com` | broadcast thumbnails |
 | `stream.kick.com` | the playlists and the video segments |
+
+It asks for four permissions: the internet, a foreground service so a download
+survives the screen turning off, the notification that shows its progress, and
+nothing else - no storage permission, because the folder you save into is one
+you pick yourself through Android's own file picker.
+
+On the phone it keeps a small record per queued job and the segments of
+downloads still in progress, in its private app storage, excluded from device
+backups. Uninstalling removes all of it; videos you saved stay in the folder you
+chose. CI rebuilds the release APK on every push and fails if any of the above
+stops being true (`scripts/privacy-gate.sh`).
 
 ## Building it
 

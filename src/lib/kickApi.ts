@@ -18,7 +18,11 @@ const API = "https://kick.com/api";
 async function getJson(url: string): Promise<unknown> {
   let res: Response;
   try {
-    res = await fetch(url, { headers: { Accept: "application/json" } });
+    // Kick marks these responses cacheable for four hours, and React Native's
+    // HTTP client honours that - so the minute-by-minute refresh was reading
+    // the same stale list back out of the cache. `no-cache` still allows the
+    // cache, but only after asking Kick whether it is current.
+    res = await fetch(url, { headers: { Accept: "application/json", "Cache-Control": "no-cache" } });
   } catch {
     throw new Error("Could not reach Kick. Check your connection and try again.");
   }

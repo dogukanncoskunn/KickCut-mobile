@@ -229,6 +229,9 @@ object Engine {
     if (!::app.isInitialized) {
       app = context.applicationContext
       FFmpegKitConfig.enableLogCallback(null)
+      // ffmpeg narrates every run into the system log - file paths, stream
+      // details. Errors are all a failed mux needs (the session keeps them).
+      FFmpegKitConfig.setLogLevel(com.arthenica.ffmpegkit.Level.AV_LOG_ERROR)
     }
   }
 

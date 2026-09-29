@@ -143,4 +143,14 @@ class MuxTest {
     assertEquals("kick-vod", safeFileName("???"))
     assertTrue(safeFileName("x".repeat(400)).length <= 120)
   }
+
+  /** A title is untrusted input and becomes a file name: it must never walk out of the folder. */
+  @Test fun a_title_cannot_escape_the_output_folder() {
+    for (evil in listOf("../../etc/passwd", "..\\..\\x", "/sdcard/Android/data/x", "..", ".", "a/../b", "\u0000x")) {
+      val name = safeFileName(evil)
+      assertFalse("$evil -> $name", name.contains('/') || name.contains('\\'))
+      assertFalse("$evil -> $name", name == "." || name == ".." || name.startsWith("."))
+      assertFalse("$evil -> $name", name.any { it.code < 0x20 })
+    }
+  }
 }

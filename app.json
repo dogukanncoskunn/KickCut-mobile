@@ -10,7 +10,7 @@
     "android": {
       "package": "com.unsatisfied0.kickcut",
       "adaptiveIcon": {
-        "backgroundColor": "#0c110f",
+        "backgroundColor": "#08e800",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -21,7 +21,8 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.VIBRATE"
-      ]
+      ],
+      "allowBackup": false
     },
     "plugins": [
       [
@@ -41,7 +42,13 @@
           }
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "expo-dev-client",
+        {
+          "addGeneratedScheme": false
+        }
+      ]
     ]
   }
 }
