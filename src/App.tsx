@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Animated, BackHandler, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { Animated, BackHandler, Image, KeyboardAvoidingView, Pressable, ScrollView, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LOCALES, LOCALE_NAMES, useLocale, useT } from "./i18n";
@@ -117,7 +117,12 @@ export function App() {
         </ScrollView>
       </View>
 
-      <View className="min-w-0 flex-1">
+      {/*
+        The app draws edge to edge, so Android no longer shrinks the window for
+        the keyboard; without this a field near the bottom - the file name, the
+        speed cap - is typed into blind, under the keys.
+      */}
+      <KeyboardAvoidingView behavior="padding" className="min-w-0 flex-1">
         {/*
           Every pane stays mounted and the inactive ones are hidden. Unmounting
           threw away their state - the quality, the range and the folder just
@@ -156,7 +161,7 @@ export function App() {
             </ErrorBoundary>
           </ScrollView>
         ))}
-      </View>
+      </KeyboardAvoidingView>
 
       {/*
         A strip of its own under the panes, not a mark floating over them. On

@@ -79,7 +79,8 @@ class DownloadService : Service() {
       .setOngoing(true)
       .setOnlyAlertOnce(true)
       .setContentIntent(open)
-      .setContentTitle(job?.get("title") as? String ?: labels.channel)
+      // The file name, as on the job cards: stream titles are long and emoji-heavy.
+      .setContentTitle(job?.get("fileName") as? String ?: labels.channel)
 
     if (job != null) {
       val mux = job["muxFraction"] as? Double
